@@ -8,15 +8,14 @@ const express = require('express'),
 var app = express(),
     sequelize = new Sequelize('bulletinboard', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, { dialect: 'postgres' });
 
+
+
 var noticesRouter = require('./routes/notices');
 
 var notice = sequelize.define('notice', {
-  title: Sequelize.STRING,
-  body: Sequelize.TEXT
+    title: Sequelize.STRING,
+    body: Sequelize.TEXT
 });
-
-
-app.use(express.static('public'));
 
 app.use(morgan('dev'));
 

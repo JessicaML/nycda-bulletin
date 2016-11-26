@@ -2,7 +2,10 @@ const express = require('express'),
       Sequelize = require('Sequelize'),
       router = express.Router();
 
-const sequelize = new Sequelize('bulletinboard', 'Jessica', '', { dialect: 'postgres' });
+const sequelize = new Sequelize('bulletinboard', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, { dialect: 'postgres' });
+
+// var connectionString = 'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD + '@localhost/bulletinboard';
+
 
 var notice = sequelize.define('notice', {
   // id: Sequelize.INTEGER,
@@ -30,7 +33,7 @@ router.delete('/:id', (request, response) => {
       id: request.params.id
     }
   }).then(() => {
-    response.redirect('/notices');
+    response.redirect('/board');
   });
 });
 
